@@ -149,7 +149,7 @@ def click(pos):
 
 def offsetDims(pos, xy):
     if xy == "list":
-        return [int(pos[0] * (screenDims[0] / 1920)), int(pos[0] * (screenDims[1] / 1080))]
+        return (int(pos[0] * (screenDims[0] / 1920)), int(pos[1] * (screenDims[1] / 1080)))
 
     elif xy == "x":
         return int(pos * (screenDims[0] / 1920))

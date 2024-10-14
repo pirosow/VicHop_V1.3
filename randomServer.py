@@ -4,11 +4,14 @@ import webbrowser
 import time
 
 lastRequest = 0
-servers_data = 0
+
+servers_data = ""
 
 def joinRandomServer(place_id):
-    global servers_data
     global lastRequest
+    global servers_data
+
+    join = False
 
     if time.time() - lastRequest >= 30:
         # URL for Roblox game instances (servers)
@@ -21,14 +24,23 @@ def joinRandomServer(place_id):
         if 'data' in newServers_data and len(newServers_data['data']) > 0:
             servers_data = newServers_data
 
-    servers = servers_data['data']
+    if 'data' in servers_data and len(servers_data['data']) > 0:
+        join = True
 
-    # Choose a random server
-    random_server = random.choice(servers)
-    server_id = random_server['id']
+    else:
+        joinRandomServer(place_id)
 
-    # Generate the Roblox server join link
-    join_url = f'roblox://placeID={place_id}&gameInstanceId={server_id}'
+    if join:
+        servers = servers_data['data']
 
-    # Open the Roblox client to join the server
-    webbrowser.open(join_url)
+        # Choose a random server
+        random_server = random.choice(servers)
+        server_id = random_server['id']
+
+        # Generate the Roblox server join link
+        join_url = f'roblox://placeID={place_id}&gameInstanceId={server_id}'
+
+        # Open the Roblox client to join the server
+        webbrowser.open(join_url)
+
+        return join_url

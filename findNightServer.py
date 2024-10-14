@@ -4,6 +4,7 @@ import time
 import pytesseract as tesseract
 from randomServer import joinRandomServer
 from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, tap, click, offsetDims
+import webbrowser
 
 tesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
@@ -23,7 +24,7 @@ def waitForLoading(maxWaitTime=20):
     while True:
         screen = screenshot()
 
-        if screen.getpixel((1300, 812)) == (34, 87, 168):
+        if screen.getpixel(offsetDims((1300, 812), "list")) == (34, 87, 168):
             break
 
         elif time.time() - tm >= maxWaitTime:
@@ -36,10 +37,10 @@ def waitForLoading(maxWaitTime=20):
     while True:
         screen = screenshot()
 
-        if screen.getpixel((1300, 812)) != (34, 87, 168):
+        if screen.getpixel(offsetDims((1300, 812), "list")) != (34, 87, 168):
             return True
 
-        elif time.time() - tm >= 20:
+        elif time.time() - tm >= maxWaitTime:
             return False
 
         time.sleep(0.05)
@@ -47,9 +48,7 @@ def waitForLoading(maxWaitTime=20):
 def detectNight():
     screen = screenshot()
 
-    if isColorClose(screen.getpixel((1376, 914)), (86, 100, 107), 5):
-        sendScreenshot("Night server found :D")
-
+    if isColorClose(screen.getpixel(offsetDims((1376, 914), "list")), (86, 100, 107), 5):
         return True
 
     return False
@@ -76,8 +75,6 @@ def claimHive():
             time.sleep(0.5)
 
             text = pytesseract.image_to_string(screenshot(monitor=claimHiveMonitor))
-
-            print(text)
 
             if "claim" in text.lower() and "hive" in text.lower():
                 press("e", 0.5)
@@ -109,19 +106,23 @@ def findNightServer(claim=True):
 
     serverLoop = 0
 
+    lastUrl = ""
+
     while True:
         serverLoop += 1
 
         if isWindowOpen("RobloxPlayerBeta.exe"):
             leave()
 
-        joinRandomServer(1537690962)
+        if open("lastUrl.txt", "r").read() == lastUrl:
+            joinRandomServer(1537690962)
 
-        sendMessage(f"Joining server x{serverLoop}")
+        else:
+            webbrowser.open(open("lastUrl.txt", "r").read())
+
+        lastUrl = open("lastUrl.txt", "r").read()
 
         if not waitForLoading(maxWaitTime=10):
-            sendMessage("Closing roblox experience is restricted error")
-
             continue
 
         time.sleep(0.5)
@@ -129,7 +130,9 @@ def findNightServer(claim=True):
         if not detectNight():
             continue
 
-        click((1000, 1000))
+        sendScreenshot(f"Night server found :D (attempts: {serverLoop})")
+
+        click(offsetDims((1000, 1000), "list"))
 
         time.sleep(0.5)
 
