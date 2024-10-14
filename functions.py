@@ -9,7 +9,7 @@ import psutil
 import threading
 import tkinter as tk
 
-webHook = "https://discordapp.com/api/webhooks/1274918744975736832/SszQOxEP-syphbG8pXgN9klvLa273CZM0F9JyA4j9BsK8pe390RZ5SMYnfpaPm5--rFJ"
+webHook = "your webhook"
 
 mouse = Controller()
 
