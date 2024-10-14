@@ -206,7 +206,8 @@ def vicBeeAttack():
 
         time.sleep(0.5)
 
-        if findImg("defeated.png", confidence=0.7):
+
+        if findImg("images/defeated.png", confidence=0.7):
             break
 
 def searchVicBeePepper():
@@ -230,7 +231,7 @@ def searchVicBeePepper():
 
     time.sleep(0.5)
 
-    if findImg("attacking.png", confidence=0.6):
+    if findImg("images/attacking.png", confidence=0.6):
         press("a", "s", 1)
 
         vicBeeAttack()
@@ -264,7 +265,7 @@ def searchVicBeeRose():
 
     time.sleep(0.5)
 
-    if findImg("attacking.png", confidence=0.6):
+    if findImg("images/attacking.png", confidence=0.6):
         press("w", "a", 1)
 
         vicBeeAttack()
@@ -298,7 +299,7 @@ def searchVicBeeMtn():
 
     time.sleep(0.5)
 
-    if findImg("attacking.png", confidence=0.6):
+    if findImg("images/attacking.png", confidence=0.6):
         press("s", "a", 1)
 
         vicBeeAttack()
@@ -326,7 +327,7 @@ def searchVicBeeCac():
 
     time.sleep(0.5)
 
-    if findImg("attacking.png", confidence=0.6):
+    if findImg("images/attacking.png", confidence=0.6):
         for _ in range(2):
             press(".", 0.1)
 

@@ -5,16 +5,15 @@ import socket
 import threading
 
 altConnection = True
+alts = 1
 
 sendMessage("Connected to discord!")
 
-def connectAlt():
+def connectAlt(port):
     hostName = socket.gethostname()
     ipAdress = socket.gethostbyname(hostName)
 
     print(f"Your ip adress to put in alt: {ipAdress}")
-
-    port = 5555
 
     tcpsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -34,7 +33,7 @@ def connectAlt():
 
     return client
 
-def recieveNightServers(client):
+def recieveNightServers(client, port):
     while True:
         try:
             url = client.recv(1024)
@@ -46,7 +45,7 @@ def recieveNightServers(client):
         except:
             sendMessage("Connection lost with alt.")
 
-            client = connectAlt()
+            client = connectAlt(port)
 
             t = threading.Thread(target=recieveNightServers, args=(client,))
             t.daemon = True
@@ -56,12 +55,15 @@ def recieveNightServers(client):
             break
 
 if altConnection:
-    client = connectAlt()
+    ports = [5555]
 
-    t = threading.Thread(target=recieveNightServers, args=(client,))
-    t.daemon = True
+    for i in range(alts):
+        client = connectAlt(ports[i])
 
-    t.start()
+        t = threading.Thread(target=recieveNightServers, args=(client, ports[i],))
+        t.daemon = True
+
+        t.start()
 
 while True:
     while True:

