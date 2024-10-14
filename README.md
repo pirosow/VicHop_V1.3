@@ -1,6 +1,6 @@
 # Hi, here's how to use my vic hop macro!
 
-### First, you can set your walkspeed in functions.py at line 18, aswell as your discord webhook at line 12 (it is mandatory to set those 2). You can also set the maximum time the macro will wait for the game to load (if it joins a restricted place for example) in findNightServer.py and findNightServerAlt.py.
+### First, you can set your walkspeed in functions.py at line 18, aswell as your discord webhook at line 12 (it is mandatory to set those 2). You can also set the maximum time the macro will wait for the game to load (if it joins a restricted place for example) in findNightServer.py and findNightServerAlt.py at line 125 and 62 respectively.
 
 # How to run the macro
 The main computer has to use windows OS for now :/
