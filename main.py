@@ -6,6 +6,8 @@ import threading
 
 altConnection = True
 
+sendMessage("Connected to discord!")
+
 def connectAlt():
     hostName = socket.gethostname()
     ipAdress = socket.gethostbyname(hostName)
@@ -20,7 +22,6 @@ def connectAlt():
 
     print("Waiting for alt to connect...")
 
-    sendMessage("Connected to discord!")
     sendMessage("Waiting for alt to connect...")
 
     tcpsocket.listen()
@@ -43,6 +44,8 @@ def recieveNightServers(client):
             open("lastUrl.txt", "w+").write(url)
 
         except:
+            sendMessage("Connection lost with alt.")
+
             client = connectAlt()
 
             t = threading.Thread(target=recieveNightServers, args=(client,))

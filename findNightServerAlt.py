@@ -2,7 +2,7 @@ from pynput.mouse import Button, Controller
 import time
 import pytesseract as tesseract
 from randomServer import joinRandomServer
-from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, tap, click, offsetDims
+from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, click, offsetDims
 
 tesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 

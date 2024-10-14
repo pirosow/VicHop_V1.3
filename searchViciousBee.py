@@ -1,14 +1,15 @@
 import pytesseract
-from pynput.mouse import Button, Controller
-import keyboard
+from pynput.mouse import Button, Controller as mouseController
+from pynput.keyboard import Controller as keyboardController, Key
 import time
 import pytesseract as tesseract
-from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, tap, click, offsetDims
+from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, click, offsetDims, keyboard
 import pyautogui
 
 tesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-mouse = Controller()
+mouse = mouseController()
+keyboard = keyboardController()
 
 hiveSlot = 7
 
@@ -195,9 +196,13 @@ def vicBeeAttack():
 
             press("a", 1)
 
-        press("/", 0.05)
+        time.sleep(0.1)
 
-        press("enter", 0.05)
+        keyboard.tap("/")
+
+        time.sleep(0.05)
+
+        keyboard.tap(Key.enter)
 
         time.sleep(0.5)
 
@@ -215,9 +220,13 @@ def searchVicBeePepper():
 
     press("d", 2)
 
-    press("/", 0.05)
+    time.sleep(0.1)
 
-    press("enter", 0.05)
+    keyboard.tap("/")
+
+    time.sleep(0.05)
+
+    keyboard.tap(Key.enter)
 
     time.sleep(0.5)
 
@@ -245,9 +254,13 @@ def searchVicBeeRose():
 
     press("s", 2)
 
-    press("/", 0.05)
+    time.sleep(0.1)
 
-    press("enter", 0.05)
+    keyboard.tap("/")
+
+    time.sleep(0.05)
+
+    keyboard.tap(Key.enter)
 
     time.sleep(0.5)
 
@@ -275,9 +288,13 @@ def searchVicBeeMtn():
 
     press("w", 2)
 
-    press("/", 0.05)
+    time.sleep(0.1)
 
-    press("enter", 0.05)
+    keyboard.tap("/")
+
+    time.sleep(0.05)
+
+    keyboard.tap(Key.enter)
 
     time.sleep(0.5)
 
@@ -299,9 +316,13 @@ def searchVicBeeCac():
 
     press("d", 0.5)
 
-    press("/", 0.05)
+    time.sleep(0.1)
 
-    press("enter", 0.05)
+    keyboard.tap("/")
+
+    time.sleep(0.05)
+
+    keyboard.tap(Key.enter)
 
     time.sleep(0.5)
 

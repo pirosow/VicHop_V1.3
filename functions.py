@@ -1,6 +1,6 @@
 import pytesseract
-from pynput.mouse import Button, Controller
-import keyboard
+from pynput.mouse import Button, Controller as mouseController
+from pynput.keyboard import Controller as keyboardController, Key
 import time
 from PIL import Image, ImageGrab
 import mss
@@ -12,7 +12,8 @@ from datetime import datetime
 
 webHook = "https://discordapp.com/api/webhooks/1274918744975736832/SszQOxEP-syphbG8pXgN9klvLa273CZM0F9JyA4j9BsK8pe390RZ5SMYnfpaPm5--rFJ"
 
-mouse = Controller()
+mouse = mouseController()
+keyboard = keyboardController()
 
 root = tk.Tk()
 
@@ -71,19 +72,19 @@ def sendScreenshot(message):
     t.start()
 
 def leave():
-    tap("esc")
+    keyboard.tap(Key.esc)
 
     time.sleep(0.025)
 
-    tap("l")
+    keyboard.tap("l")
 
     time.sleep(0.025)
 
-    tap("enter")
+    keyboard.tap(Key.enter)
 
 
 def reset(hive=True):
-    press("esc", 0.05)
+    press(Key.esc, 0.05)
 
     time.sleep(0.05)
 
@@ -91,7 +92,7 @@ def reset(hive=True):
 
     time.sleep(0.05)
 
-    press("enter", 0.05)
+    press(Key.enter, 0.05)
 
     time.sleep(8)
 
@@ -131,14 +132,6 @@ def screenshot(monitor=False):
     screen = Image.frombytes("RGB", screen.size, screen.bgra, "raw", "BGRX")
 
     return screen
-
-
-def tap(k):
-    keyboard.press(k)
-
-    time.sleep(0.05)
-
-    keyboard.release(k)
 
 
 def click(pos):
