@@ -132,7 +132,7 @@ def findNightServer(claim=True):
 
         sendScreenshot(f"Night server found :D (attempts: {serverLoop})")
 
-        click(offsetDims((1000, 1000), "list"))
+        click(offsetDims((1000, 500), "list"))
 
         time.sleep(0.5)
 

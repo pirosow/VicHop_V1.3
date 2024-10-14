@@ -187,13 +187,13 @@ def vicBeeAttack():
 
     while time.time() - tm < 60:
         for _ in range(2):
-            press("w", 0.5)
+            press("w", 1)
 
-            press("d", 0.5)
+            press("d", 1)
 
-            press("s", 0.5)
+            press("s", 1)
 
-            press("a", 0.5)
+            press("a", 1)
 
         press("/", 0.05)
 
@@ -222,7 +222,7 @@ def searchVicBeePepper():
     time.sleep(0.5)
 
     if findImg("attacking.png", confidence=0.6):
-        press("a", "s", 0.5)
+        press("a", "s", 1)
 
         vicBeeAttack()
 
@@ -252,7 +252,7 @@ def searchVicBeeRose():
     time.sleep(0.5)
 
     if findImg("attacking.png", confidence=0.6):
-        press("w", "a", 0.5)
+        press("w", "a", 1)
 
         vicBeeAttack()
 
@@ -282,7 +282,7 @@ def searchVicBeeMtn():
     time.sleep(0.5)
 
     if findImg("attacking.png", confidence=0.6):
-        press("s", "a", 0.5)
+        press("s", "a", 1)
 
         vicBeeAttack()
 
@@ -306,6 +306,11 @@ def searchVicBeeCac():
     time.sleep(0.5)
 
     if findImg("attacking.png", confidence=0.6):
+        for _ in range(2):
+            press(".", 0.1)
+
+            time.sleep(0.1)
+
         vicBeeAttack()
 
         return True
@@ -317,26 +322,40 @@ def searchVicBee(hiveSlotParam):
 
     hiveSlot = hiveSlotParam
 
+    sendMessage("Going to pepper")
+
     goToPepper()
 
     found = searchVicBeePepper()
 
     if found:
+        sendScreenshot("Vicious bee defeated!")
+
         return
+
+    sendMessage("No vicious bee found, going to rose")
 
     goToRose()
 
     found = searchVicBeeRose()
 
     if found:
+        sendScreenshot("Vicious bee defeated!")
+
         return
+
+    sendMessage("No vicious bee found, going to mountain")
 
     goToMtn()
 
     found = searchVicBeeMtn()
 
     if found:
+        sendScreenshot("Vicious bee defeated!")
+
         return
+
+    sendMessage("No vicious bee found, going to cactus")
 
     goToCac()
 
@@ -344,3 +363,6 @@ def searchVicBee(hiveSlotParam):
 
     if not found:
         sendScreenshot("No vicious bee found :/")
+
+    else:
+        sendScreenshot("Vicious bee defeated!")

@@ -8,8 +8,9 @@ import discord
 import psutil
 import threading
 import tkinter as tk
+from datetime import datetime
 
-webHook = "your webhook"
+webHook = "https://discordapp.com/api/webhooks/1274918744975736832/SszQOxEP-syphbG8pXgN9klvLa273CZM0F9JyA4j9BsK8pe390RZ5SMYnfpaPm5--rFJ"
 
 mouse = Controller()
 
@@ -52,7 +53,9 @@ def isWindowOpen(windowName):
 def sendMessage(message, picture=None):
     webhook = discord.SyncWebhook.from_url(webHook)
 
-    webhook.send(message) if picture == None else webhook.send(message, file=picture)
+    tm = datetime.now()
+
+    webhook.send(f"[{tm.hour}:{tm.minute}:{tm.second}] {message}") if picture == None else webhook.send(f"[{tm.hour}:{tm.minute}:{tm.second}] {message}", file=picture)
 
 
 def sendScreenshot(message):

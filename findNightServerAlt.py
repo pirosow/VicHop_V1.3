@@ -51,9 +51,7 @@ def detectNight():
 
     return False
 
-def findNightServer(claim=True):
-    hiveSlot = 0
-
+def findNightServer():
     serverLoop = 0
 
     while True:
@@ -70,8 +68,6 @@ def findNightServer(claim=True):
             continue
 
         sendScreenshot(f"Night server found on alt :D (attempts: {serverLoop})")
-
-        click(offsetDims((1000, 1000), "list"))
 
         time.sleep(0.5)
 

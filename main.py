@@ -1,4 +1,5 @@
 from findNightServer import findNightServer
+from functions import sendMessage, sendScreenshot
 from searchViciousBee import searchVicBee
 import socket
 import threading
@@ -19,21 +20,37 @@ def connectAlt():
 
     print("Waiting for alt to connect...")
 
+    sendMessage("Connected to discord!")
+    sendMessage("Waiting for alt to connect...")
+
     tcpsocket.listen()
     (client, (ip, port)) = tcpsocket.accept()
 
 
     print(f"Alt connected, ip: {ip}, port: {port}")
 
+    sendMessage("Alt connected! Joining servers...")
+
     return client
 
 def recieveNightServers(client):
     while True:
-        url = client.recv(1024)
+        try:
+            url = client.recv(1024)
 
-        url = url.decode()
+            url = url.decode()
 
-        open("lastUrl.txt", "w+").write(url)
+            open("lastUrl.txt", "w+").write(url)
+
+        except:
+            client = connectAlt()
+
+            t = threading.Thread(target=recieveNightServers, args=(client,))
+            t.daemon = True
+
+            t.start()
+
+            break
 
 if altConnection:
     client = connectAlt()
