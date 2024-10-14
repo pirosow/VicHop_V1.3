@@ -22,8 +22,6 @@ def waitForLoading(maxWaitTime=20):
     while True:
         screen = screenshot()
 
-        print(screen.getpixel(offsetDims((1300, 812), "list")))
-
         if isColorClose(screen.getpixel(offsetDims((1300, 812), "list")), (35, 79, 171), 5):
             break
 
@@ -66,7 +64,7 @@ def findNightServer(claim=True):
         if not waitForLoading(maxWaitTime=45):
             continue
 
-        time.sleep(0.5)
+        time.sleep(2)
 
         if not detectNight():
             continue

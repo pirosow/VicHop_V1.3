@@ -125,7 +125,7 @@ def findNightServer(claim=True):
         if not waitForLoading(maxWaitTime=10):
             continue
 
-        time.sleep(0.5)
+        time.sleep(1)
 
         if not detectNight():
             continue

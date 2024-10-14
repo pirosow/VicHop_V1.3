@@ -4,6 +4,7 @@ import keyboard
 import time
 import pytesseract as tesseract
 from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, tap, click, offsetDims
+import pyautogui
 
 tesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
@@ -26,6 +27,19 @@ claimHiveMonitor = {
         "height": offsetDims(121 - 62, "y"),
         "mon": 0,
 }
+
+def findImg(img, confidence):
+    try:
+        pos = pyautogui.locateCenterOnScreen(img, confidence=confidence)
+
+        pyautogui.moveTo(pos)
+
+        return True
+
+    except:
+        return False
+
+time.sleep(2)
 
 def cannon(rst=True):
     loop = 0
@@ -185,11 +199,9 @@ def vicBeeAttack():
 
         press("enter", 0.05)
 
-        screen = screenshot(monitor=chatMonitor)
+        time.sleep(0.5)
 
-        text = pytesseract.image_to_string(screen)
-
-        if "defeated" in text.lower():
+        if findImg("defeated.png", confidence=0.7):
             break
 
 def searchVicBeePepper():
@@ -207,11 +219,9 @@ def searchVicBeePepper():
 
     press("enter", 0.05)
 
-    screen = screenshot(monitor=chatMonitor)
+    time.sleep(0.5)
 
-    text = pytesseract.image_to_string(screen)
-
-    if "vicious bee is attacking" in text.lower():
+    if findImg("attacking.png", confidence=0.6):
         press("a", "s", 0.5)
 
         vicBeeAttack()
@@ -239,11 +249,9 @@ def searchVicBeeRose():
 
     press("enter", 0.05)
 
-    screen = screenshot(monitor=chatMonitor)
+    time.sleep(0.5)
 
-    text = pytesseract.image_to_string(screen)
-
-    if "vicious bee is attacking" in text.lower():
+    if findImg("attacking.png", confidence=0.6):
         press("w", "a", 0.5)
 
         vicBeeAttack()
@@ -271,11 +279,9 @@ def searchVicBeeMtn():
 
     press("enter", 0.05)
 
-    screen = screenshot(monitor=chatMonitor)
+    time.sleep(0.5)
 
-    text = pytesseract.image_to_string(screen)
-
-    if "vicious bee is attacking" in text.lower():
+    if findImg("attacking.png", confidence=0.6):
         press("s", "a", 0.5)
 
         vicBeeAttack()
@@ -297,11 +303,9 @@ def searchVicBeeCac():
 
     press("enter", 0.05)
 
-    screen = screenshot(monitor=chatMonitor)
+    time.sleep(0.5)
 
-    text = pytesseract.image_to_string(screen)
-
-    if "vicious bee is attacking" in text.lower():
+    if findImg("attacking.png", confidence=0.6):
         vicBeeAttack()
 
         return True

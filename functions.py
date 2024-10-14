@@ -82,11 +82,11 @@ def leave():
 def reset(hive=True):
     press("esc", 0.05)
 
-    time.sleep(0.25)
+    time.sleep(0.05)
 
     press("r", 0.05)
 
-    time.sleep(0.25)
+    time.sleep(0.05)
 
     press("enter", 0.05)
 
