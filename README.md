@@ -22,5 +22,4 @@ You will need to have the following libraries installed with pip:
 - tkinter
 - mss
 - PIL (pillow)
-- keyboard
 - pyautogui
