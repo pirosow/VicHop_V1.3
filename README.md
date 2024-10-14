@@ -23,3 +23,4 @@ You will need to have the following libraries installed with pip:
 - mss
 - PIL (pillow)
 - keyboard
+- pyautogui
