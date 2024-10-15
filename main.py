@@ -47,7 +47,7 @@ def recieveNightServers(client, port):
 
             client = connectAlt(port)
 
-            t = threading.Thread(target=recieveNightServers, args=(client,))
+            t = threading.Thread(target=recieveNightServers, args=(client, port,))
             t.daemon = True
 
             t.start()
