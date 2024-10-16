@@ -77,7 +77,7 @@ def recieveNightServers(client, port):
             break
 
 if altConnection:
-    ports = [5555]
+    ports = [5555] #ports to every alt
 
     for port in ports:
         client = connectAlt(port)

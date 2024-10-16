@@ -11,6 +11,8 @@ def joinRandomServer(place_id):
     global lastRequest
     global servers_data
 
+    join = False
+
     if time.time() - lastRequest >= 30:
         # URL for Roblox game instances (servers)
         api_url = f'https://games.roblox.com/v1/games/{place_id}/servers/Public?sortOrder=Asc&limit=100'

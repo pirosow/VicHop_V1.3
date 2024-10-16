@@ -1,12 +1,7 @@
-import pytesseract
 from pynput.mouse import Button, Controller as mouseController
 from pynput.keyboard import Controller as keyboardController, Key
 import time
-import pytesseract as tesseract
-from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, click, offsetDims, keyboard
-import pyautogui
-
-tesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, click, offsetDims, keyboard, findImg
 
 mouse = mouseController()
 keyboard = keyboardController()
@@ -29,23 +24,15 @@ claimHiveMonitor = {
         "mon": 0,
 }
 
-def findImg(img, confidence):
-    try:
-        pos = pyautogui.locateCenterOnScreen(img, confidence=confidence)
-
-        pyautogui.moveTo(pos)
-
-        return True
-
-    except:
-        return False
-
 time.sleep(2)
 
 def cannon(rst=True):
     loop = 0
 
     while True:
+        if loop >= 20:
+            break
+
         if rst or loop > 0:
             reset()
 
@@ -63,11 +50,9 @@ def cannon(rst=True):
 
         keyboard.release("d")
 
-        screen = screenshot(monitor=claimHiveMonitor)
+        time.sleep(0.5)
 
-        text = pytesseract.image_to_string(screen)
-
-        if "fire" in text.lower():
+        if findImg("images/cannon.png", 0.7):
             break
 
         loop += 1

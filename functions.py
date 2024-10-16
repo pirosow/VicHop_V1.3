@@ -1,4 +1,4 @@
-import pytesseract
+import pyautogui
 from pynput.mouse import Button, Controller as mouseController
 from pynput.keyboard import Controller as keyboardController, Key
 import time
@@ -97,12 +97,19 @@ def reset(hive=True):
     time.sleep(8)
 
     if hive:
-        screen = screenshot(monitor=claimHiveMonitor)
-
-        text = pytesseract.image_to_string(screen)
-
-        if not "make honey" in text.lower():
+        if not findImg("images/make_honey1.png", 0.7) and not findImg("images/make_honey2.png", 0.7):
             press("w", "d", 3)
+
+def findImg(img, confidence):
+    try:
+        pos = pyautogui.locateCenterOnScreen(img, confidence=confidence)
+
+        pyautogui.moveTo(pos)
+
+        return True
+
+    except:
+        return False
 
 def press(*args):
     keys = list(args)

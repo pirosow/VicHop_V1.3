@@ -27,10 +27,14 @@ while True:
         tcpsocket.send(url)
 
     except:
-        print("Connection lost to main. Reconnecting...")
+        try:
+            print("Connection lost to main. Reconnecting...")
 
-        sendMessage("Connection lost to main. Reconnecting... [alt]")
+            sendMessage("Connection lost to main. Reconnecting... [alt]")
 
-        time.sleep(10)
+            time.sleep(10)
 
-        tcpsocket = connectToMain(port)
+            tcpsocket = connectToMain(port)
+
+        except:
+            pass

@@ -1,12 +1,8 @@
-import pytesseract
 from pynput.mouse import Button, Controller
 import time
-import pytesseract as tesseract
 from randomServer import joinRandomServer
-from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, click, offsetDims
+from functions import isWindowOpen, isColorClose, sendMessage, sendScreenshot, leave, reset, press, screenshot, click, offsetDims, findImg
 import webbrowser
-
-tesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 mouse = Controller()
 
@@ -74,9 +70,7 @@ def claimHive():
 
             time.sleep(0.5)
 
-            text = pytesseract.image_to_string(screenshot(monitor=claimHiveMonitor))
-
-            if "claim" in text.lower() and "hive" in text.lower():
+            if findImg("images/claim_hive.png", 0.8):
                 press("e", 0.5)
 
                 sendScreenshot(f"Claimed hive slot {hiveSlot}")
