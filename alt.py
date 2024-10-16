@@ -5,7 +5,7 @@ import time
 from functions import sendMessage
 
 hostName = socket.gethostname()
-ipAdress = "192.168.0.172" #my local ip xd
+ipAdress = "local ip adress here"
 
 port = 5555
 
