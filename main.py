@@ -41,11 +41,12 @@ def recieveNightServers(client, port):
         try:
             url = client.recv(1024)
 
-            if not url:
-                if time.time() - lastCheck >= timeout:
-                    raise TimeoutError
+            if time.time() - lastCheck >= timeout:
+                raise TimeoutError
 
-            else:
+            if url:
+                print(f"Url: {url}")
+
                 lastCheck = time.time()
 
             url = url.decode()
