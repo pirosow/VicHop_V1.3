@@ -3,7 +3,6 @@
 ### First, you can set your walkspeed in functions.py at line 18, aswell as your discord webhook at line 12 (it is mandatory to set those 2). You can also set the maximum time the macro will wait for the game to load (if it joins a restricted place for example) in findNightServer.py and findNightServerAlt.py at line 125 and 62 respectively.
 
 # How to run the macro
-The main computer has to use windows OS for now :/
 If you don't run any alt, set altConnection to False in main.py at line 6.
 Run main.py first.
 
@@ -18,7 +17,6 @@ Run the alts in the same order as the ports in main.py at line 58.
 # Packages to install
 You will need to have the following libraries installed with pip:
 - fontTools
-- pytesseract (watch a tutorial on youtube that tells how to install it, and you'll have to change its path in searchViciousBee.py at line 8 and in findNightServer.py at line 9.
 - pynput
 - discord
 - psutil
