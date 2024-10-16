@@ -8,9 +8,12 @@ If you don't run any alt, set altConnection to False in main.py at line 6.
 Run main.py first.
 
 # Connecting an alt
-Make sure to set altConnection to True in main.py at line 6.
-You will need a second device to run an alt, which has to be connected to the same wifi network as the main running computer. It can run on windows, macOS and linux (not tested on linux).
+Make sure to set altConnection to True in main.py at line 7.
+Set alts to the number of alts you'll connect in main.py at line 8.
+You will need other devices to run a alts, which have to be connected to the same wifi network as the main running computer. They can run on windows, macOS and linux (not tested on linux).
+You'll have to set the port on every alt device in alt.py at line 11, and change the numbers in main.py at line 58 to the corresponding ports.
 Set your local ip address in alt.py at line 6, you can get it by running main.py with altConnection set as True at line 6.
+Run the alts in the same order as the ports in main.py at line 58.
 
 # Packages to install
 You will need to have the following libraries installed with pip:
