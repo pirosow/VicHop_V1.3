@@ -2,15 +2,21 @@ from findNightServerAlt import findNightServer
 import socket
 from fontTools.misc.textTools import tobytes
 import time
+from functions import sendMessage
 
 hostName = socket.gethostname()
 ipAdress = "192.168.0.172" #my local ip xd
 
-tcpsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
 port = 5555
 
-tcpsocket.connect((ipAdress, port))
+def connectToMain(port):
+    tcpsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+    tcpsocket.connect((ipAdress, port))
+
+    return tcpsocket
+
+tcpsocket = connectToMain(port)
 
 while True:
     try:
@@ -21,10 +27,10 @@ while True:
         tcpsocket.send(url)
 
     except:
-        time.sleep(300)
+        print("Connection lost to main. Reconnecting...")
 
-        tcpsocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sendMessage("Connection lost to main. Reconnecting... [alt]")
 
-        port = 5555
+        time.sleep(10)
 
-        tcpsocket.connect((ipAdress, port))
+        tcpsocket = connectToMain(port)

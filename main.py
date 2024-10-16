@@ -3,9 +3,11 @@ from functions import sendMessage, sendScreenshot
 from searchViciousBee import searchVicBee
 import socket
 import threading
+import time
 
 altConnection = True
-alts = 1
+
+timeout = 20 * 60 #max time the macro will wait before stopping connection & try to reconnect
 
 sendMessage("Connected to discord!")
 
@@ -26,7 +28,6 @@ def connectAlt(port):
     tcpsocket.listen()
     (client, (ip, port)) = tcpsocket.accept()
 
-
     print(f"Alt connected, ip: {ip}, port: {port}")
 
     sendMessage("Alt connected! Joining servers...")
@@ -34,20 +35,41 @@ def connectAlt(port):
     return client
 
 def recieveNightServers(client, port):
+    lastCheck = time.time()
+
     while True:
         try:
             url = client.recv(1024)
+
+            if not url:
+                if time.time() - lastCheck >= timeout:
+                    raise TimeoutError
+
+            else:
+                lastCheck = time.time()
 
             url = url.decode()
 
             open("lastUrl.txt", "w+").write(url)
 
-        except:
-            sendMessage("Connection lost with alt.")
+        except Exception as e:
+            print(e)
+
+            print("Lost connection to alt. Closing socket client...")
+
+            sendMessage("Lost connection to alt. Closing socket client...")
+
+            client.shutdown(socket.SHUT_RDWR)
+
+            client.close()
+
+            time.sleep(5)
+
+            print("Reconnecting to alt...")
 
             client = connectAlt(port)
 
-            t = threading.Thread(target=recieveNightServers, args=(client,))
+            t = threading.Thread(target=recieveNightServers, args=(client, port,))
             t.daemon = True
 
             t.start()
@@ -57,10 +79,10 @@ def recieveNightServers(client, port):
 if altConnection:
     ports = [5555]
 
-    for i in range(alts):
-        client = connectAlt(ports[i])
+    for port in ports:
+        client = connectAlt(port)
 
-        t = threading.Thread(target=recieveNightServers, args=(client, ports[i],))
+        t = threading.Thread(target=recieveNightServers, args=(client, port,))
         t.daemon = True
 
         t.start()

@@ -118,6 +118,8 @@ def findNightServer(claim=True):
             joinRandomServer(1537690962)
 
         else:
+            sendMessage("Joining alt...")
+
             webbrowser.open(open("lastUrl.txt", "r").read())
 
         lastUrl = open("lastUrl.txt", "r").read()

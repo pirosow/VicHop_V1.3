@@ -22,7 +22,17 @@ def joinRandomServer(place_id):
         if 'data' in newServers_data and len(newServers_data['data']) > 0:
             servers_data = newServers_data
 
-    join = True if 'data' in servers_data and len(servers_data['data']) > 0 else joinRandomServer(place_id)
+    try:
+        if 'data' in servers_data and len(servers_data['data']) > 0:
+            join = True
+
+        else:
+            time.sleep(10)
+
+            joinRandomServer(place_id)
+
+    except:
+        pass
 
     if join:
         servers = servers_data['data']
